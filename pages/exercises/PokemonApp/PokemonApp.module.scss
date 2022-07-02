@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints.scss" as b;
+
 .container {
   min-height: 100vh;
   background: var(--pokemon-app-primary-color);
@@ -12,10 +14,16 @@
 
 .pokemon-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
   width: 80%;
   margin: 0 auto;
+
+  @media screen and (min-width: b.$sm) {
+    flex-direction: row;
+  }
 }
 
 .highlight {
