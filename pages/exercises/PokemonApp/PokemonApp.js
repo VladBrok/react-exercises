@@ -11,10 +11,10 @@ export default function PokemonApp() {
   }, []);
 
   async function getPokemons() {
-    setPokemons({
-      first: await getRandomPokemon(),
-      second: await getRandomPokemon(),
-    });
+    const first = await getRandomPokemon();
+    const disallowedId = first.id;
+    const second = await getRandomPokemon(disallowedId);
+    setPokemons({ first, second });
   }
 
   return (
@@ -26,9 +26,9 @@ export default function PokemonApp() {
         <h1 className={styles.heading}>Which Pokemon is Prettier?</h1>
         {pokemons ? (
           <div className={styles["pokemon-container"]}>
-            <Pokemon {...pokemons.first} />
+            <Pokemon {...pokemons.first} onClick={getPokemons} />
             <span className={styles.highlight}>or</span>
-            <Pokemon {...pokemons.second} />
+            <Pokemon {...pokemons.second} onClick={getPokemons} />
           </div>
         ) : (
           <div>Loading...</div>

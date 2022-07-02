@@ -11,9 +11,11 @@
 
 .heading {
   font-size: 1.2rem;
+  text-transform: capitalize;
 }
 
 .image {
   display: block;
   width: 130%;
+  max-height: 10rem;
 }
