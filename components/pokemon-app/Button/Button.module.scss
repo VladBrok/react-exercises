@@ -1,0 +1,14 @@
+.button {
+  --border: 0.1rem solid;
+  border-radius: 9999px;
+  background: var(--pokemon-app-secondary-color);
+  color: #3d4156;
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: var(--border) transparent;
+
+  &:focus {
+    border: var(--border) #6366f1;
+  }
+}

@@ -1,7 +1,10 @@
+:root {
+  --pokemon-app-primary-color: #1f2937;
+  --pokemon-app-secondary-color: white;
+}
+
 html,
 body {
-  padding: 0;
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -12,5 +15,25 @@ a {
 }
 
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: inherit;
+}
+
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
 }
