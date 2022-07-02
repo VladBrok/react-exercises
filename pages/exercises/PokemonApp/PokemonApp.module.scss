@@ -9,3 +9,16 @@
   padding: 1.5rem 0;
   font-size: 1.6rem;
 }
+
+.pokemon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.highlight {
+  font-style: italic;
+  font-size: 1.1rem;
+}
