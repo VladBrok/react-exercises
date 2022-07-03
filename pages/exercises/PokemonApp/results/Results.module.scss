@@ -1,9 +1,53 @@
+@use "../../../../styles/breakpoints.scss" as b;
+$border: 0.07rem solid var(--pokemon-app-secondary-color);
+
 .heading {
   font-size: 1.5rem;
 }
 
-.container {
-  border: 0.1rem solid var(--pokemon-app-secondary-color);
+.list {
+  border: $border;
   width: 90%;
+  max-width: 42rem;
   margin: 1rem auto;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.list-item,
+.pokemon-container {
+  display: flex;
+  align-items: center;
+}
+
+.pokemon-container {
+  flex-direction: row-reverse;
+  margin-left: 1rem;
+  & > * {
+    margin: 0 0.2rem 0 0.6rem;
+  }
+
+  @media only screen and (min-width: b.$sm) {
+    margin-left: 2rem;
+    & > * {
+      margin: 0 0.5rem 0 1rem;
+    }
+  }
+}
+
+.number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.15rem 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.27);
+  border-radius: 0 0 0.6rem 0;
+  border: 0.05rem solid rgba(255, 255, 255, 0.5);
+}
+
+.percentage {
+  margin: 0 1.5rem 0 auto;
+  font-size: 1.2rem;
 }
