@@ -1,10 +1,10 @@
-import styles from "./Pokemon.module.scss";
-import Button from "../../../components/pokemon-app/Button";
+import styles from "./PokemonContainer.module.scss";
+import Button from "../Button";
 import Image from "next/image";
 
 const IMAGE_SIZE = 170;
 
-export default function Pokemon({ name, imageUrl, onClick }) {
+export default function PokemonContainer({ name, imageUrl, onClick }) {
   return (
     <section className={styles.container}>
       <h2 className={styles.heading}>{name}</h2>

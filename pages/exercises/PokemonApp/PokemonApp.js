@@ -1,6 +1,5 @@
 import styles from "./PokemonApp.module.scss";
-import Pokemon from "../../../components/pokemon-app/Pokemon";
-import Head from "next/head";
+import PokemonContainer from "../../../components/pokemon-app/PokemonContainer";
 import { getRandomPokemon } from "../../../lib/pokemon-app/getRandomPokemon";
 import { useEffect, useRef, useState } from "react";
 import Layout from "../../../components/pokemon-app/Layout";
@@ -41,11 +40,11 @@ export default function PokemonApp() {
       {pokemons ? (
         <div className={styles["pokemon-container"]}>
           <div ref={firstRef} className={styles.pokemon}>
-            <Pokemon {...pokemons.first} onClick={getPokemons} />
+            <PokemonContainer {...pokemons.first} onClick={getPokemons} />
           </div>
           <span className={styles.highlight}>or</span>
           <div ref={secondRef} className={styles.pokemon}>
-            <Pokemon {...pokemons.second} onClick={getPokemons} />
+            <PokemonContainer {...pokemons.second} onClick={getPokemons} />
           </div>{" "}
         </div>
       ) : (
