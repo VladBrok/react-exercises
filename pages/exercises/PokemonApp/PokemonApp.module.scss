@@ -33,3 +33,14 @@
 .pokemon {
   transition: opacity 0.15s;
 }
+
+.link {
+  text-decoration: underline;
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

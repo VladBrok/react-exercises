@@ -3,6 +3,7 @@ import PokemonContainer from "../../../components/pokemon-app/PokemonContainer";
 import { getRandomPokemon } from "../../../lib/pokemon-app/getRandomPokemon";
 import { useEffect, useRef, useState } from "react";
 import Layout from "../../../components/pokemon-app/Layout";
+import Link from "next/link";
 
 export default function PokemonApp() {
   const [pokemons, setPokemons] = useState();
@@ -50,6 +51,9 @@ export default function PokemonApp() {
       ) : (
         <div>Loading...</div>
       )}
+      <Link href="/exercises/PokemonApp/results">
+        <a className={styles.link}>Show Results</a>
+      </Link>
     </Layout>
   );
 }
