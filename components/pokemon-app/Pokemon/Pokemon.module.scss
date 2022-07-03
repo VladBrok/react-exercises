@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints.scss" as b;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,17 +7,13 @@
   margin: 0 2rem;
 
   & > * {
-    margin: 1.5rem 0;
+    @media only screen and (min-width: b.$sm) {
+      margin: 1rem 0;
+    }
   }
 }
 
 .heading {
   font-size: 1.2rem;
   text-transform: capitalize;
-}
-
-.image {
-  display: block;
-  width: 130%;
-  max-height: 10rem;
 }

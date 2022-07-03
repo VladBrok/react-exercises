@@ -5,6 +5,7 @@
   background: var(--pokemon-app-primary-color);
   color: var(--pokemon-app-secondary-color);
   text-align: center;
+  padding: 1rem;
 }
 
 .heading {
@@ -21,7 +22,7 @@
   width: 80%;
   margin: 0 auto;
 
-  @media screen and (min-width: b.$sm) {
+  @media only screen and (min-width: b.$sm) {
     flex-direction: row;
   }
 }
@@ -29,4 +30,5 @@
 .highlight {
   font-style: italic;
   font-size: 1.1rem;
+  margin: 1.7rem 0;
 }
