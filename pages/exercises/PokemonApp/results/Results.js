@@ -24,7 +24,7 @@ export default function Results({ pokemons }) {
   ));
 
   return (
-    <Layout>
+    <Layout title="Results">
       <h1 className={styles.heading}>Results</h1>
       <ul className={styles.list}>{pokemonsList}</ul>
     </Layout>
