@@ -18,6 +18,17 @@ export default function Results() {
           </div>
           <span className={styles.percentage}>70%</span>
         </li>
+        <li className={styles["list-item"]}>
+          <span className={styles.number}>1</span>
+          <div className={styles["pokemon-container"]}>
+            <Pokemon
+              imageSize={55}
+              name="joe"
+              imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg"
+            />
+          </div>
+          <span className={styles.percentage}>70%</span>
+        </li>
       </ul>
     </Layout>
   );

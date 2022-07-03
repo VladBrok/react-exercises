@@ -7,17 +7,22 @@ $border: 0.07rem solid var(--pokemon-app-secondary-color);
 
 .list {
   border: $border;
+  border-bottom: none;
   width: 90%;
   max-width: 42rem;
   margin: 1rem auto;
-  padding: 0.5rem;
-  position: relative;
 }
 
 .list-item,
 .pokemon-container {
   display: flex;
   align-items: center;
+}
+
+.list-item {
+  padding: 0.5rem;
+  position: relative;
+  border-bottom: $border;
 }
 
 .pokemon-container {
