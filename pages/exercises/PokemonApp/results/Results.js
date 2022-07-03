@@ -1,35 +1,32 @@
 import styles from "./Results.module.scss";
 import Layout from "../../../../components/pokemon-app/Layout";
 import Pokemon from "../../../../components/pokemon-app/Pokemon";
+import { getPokemonsWithVotes } from "../../../../lib/pokemon-app/getPokemonsWithVotes";
 
-export default function Results() {
+export async function getServerSideProps() {
+  const pokemons = await getPokemonsWithVotes();
+  return {
+    props: {
+      pokemons,
+    },
+  };
+}
+
+export default function Results({ pokemons }) {
+  const pokemonsList = pokemons.map((p, i) => (
+    <li className={styles["list-item"]} key={p.id}>
+      <span className={styles.number}>{i + 1}</span>
+      <div className={styles["pokemon-container"]}>
+        <Pokemon imageUrl={p.imageUrl} name={p.name} imageSize="50" />
+      </div>
+      <span className={styles.percentage}>{p.percentage}</span>
+    </li>
+  ));
+
   return (
     <Layout>
       <h1 className={styles.heading}>Results</h1>
-      <ul className={styles.list}>
-        <li className={styles["list-item"]}>
-          <span className={styles.number}>1</span>
-          <div className={styles["pokemon-container"]}>
-            <Pokemon
-              imageSize={55}
-              name="joe"
-              imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg"
-            />
-          </div>
-          <span className={styles.percentage}>70%</span>
-        </li>
-        <li className={styles["list-item"]}>
-          <span className={styles.number}>1</span>
-          <div className={styles["pokemon-container"]}>
-            <Pokemon
-              imageSize={55}
-              name="joe"
-              imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/3.svg"
-            />
-          </div>
-          <span className={styles.percentage}>70%</span>
-        </li>
-      </ul>
+      <ul className={styles.list}>{pokemonsList}</ul>
     </Layout>
   );
 }

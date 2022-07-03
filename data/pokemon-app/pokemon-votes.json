@@ -1,1 +1,11 @@
-[{"id":"2","voteCount":2},{"id":"1","voteCount":1}]
+[
+  { "id": "65", "voteCount": 1 },
+  { "id": "64", "voteCount": 1 },
+  { "id": "75", "voteCount": 1 },
+  { "id": "73", "voteCount": 1 },
+  { "id": "19", "voteCount": 1 },
+  { "id": "5", "voteCount": 1 },
+  { "id": "12", "voteCount": 1 },
+  { "id": "29", "voteCount": 1 },
+  { "id": "39", "voteCount": 2 }
+]

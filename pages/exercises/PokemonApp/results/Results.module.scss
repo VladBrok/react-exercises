@@ -55,4 +55,8 @@ $border: 0.07rem solid var(--pokemon-app-secondary-color);
 .percentage {
   margin: 0 1.5rem 0 auto;
   font-size: 1.2rem;
+
+  &::after {
+    content: "%";
+  }
 }
