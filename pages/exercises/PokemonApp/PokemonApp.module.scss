@@ -1,13 +1,5 @@
 @use "../../../styles/breakpoints.scss" as b;
 
-.container {
-  min-height: 100vh;
-  background: var(--pokemon-app-primary-color);
-  color: var(--pokemon-app-secondary-color);
-  text-align: center;
-  padding: 1rem;
-}
-
 .heading {
   padding: 1.5rem 0;
   font-size: 1.6rem;
