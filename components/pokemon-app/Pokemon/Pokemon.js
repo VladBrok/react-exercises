@@ -2,7 +2,7 @@ import styles from "./Pokemon.module.scss";
 import Button from "../../../components/pokemon-app/Button";
 import Image from "next/image";
 
-const IMAGE_SIZE = 160;
+const IMAGE_SIZE = 170;
 
 export default function Pokemon({ name, imageUrl, onClick }) {
   return (
