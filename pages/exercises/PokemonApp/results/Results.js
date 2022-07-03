@@ -2,18 +2,25 @@ import styles from "./Results.module.scss";
 import Layout from "../../../../components/pokemon-app/Layout";
 import Pokemon from "../../../../components/pokemon-app/Pokemon";
 import { getPokemonsWithVotes } from "../../../../lib/pokemon-app/getPokemonsWithVotes";
+import { useEffect, useState } from "react";
 
-export async function getServerSideProps() {
-  const pokemons = await getPokemonsWithVotes();
-  return {
-    props: {
-      pokemons,
-    },
-  };
-}
+export default function Results() {
+  const [pokemons, setPokemons] = useState([]);
+  useEffect(lazyLoad, []);
 
-export default function Results({ pokemons }) {
-  const pokemonsList = pokemons.map((p, i) => (
+  function lazyLoad() {
+    const token = { cancellationRequested: false };
+    getPokemonsWithVotes(p => {
+      setPokemons(current => [...current, p]);
+    }, token);
+
+    return () => {
+      token.cancellationRequested = true;
+      setPokemons([]);
+    };
+  }
+
+  const pokemonsList = pokemons?.map((p, i) => (
     <li className={styles["list-item"]} key={p.id}>
       <span className={styles.number}>{i + 1}</span>
       <div className={styles["pokemon-container"]}>
@@ -26,7 +33,11 @@ export default function Results({ pokemons }) {
   return (
     <Layout title="Results">
       <h1 className={styles.heading}>Results</h1>
-      <ul className={styles.list}>{pokemonsList}</ul>
+      {pokemons.length > 0 ? (
+        <ul className={styles.list}>{pokemonsList}</ul>
+      ) : (
+        <div>Loading...</div>
+      )}
     </Layout>
   );
 }
