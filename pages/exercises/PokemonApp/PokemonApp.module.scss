@@ -3,11 +3,6 @@
 .heading {
   padding: 1.5rem 0;
   font-size: 1.6rem;
-
-  &:focus,
-  &:focus-visible {
-    outline: none;
-  }
 }
 
 .pokemon-container {

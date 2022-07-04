@@ -9,7 +9,6 @@ export default function PokemonApp() {
   const [pokemons, setPokemons] = useState();
   const firstRef = useRef();
   const secondRef = useRef();
-  const headingRef = useRef();
 
   useEffect(() => {
     getPokemons();
@@ -21,7 +20,6 @@ export default function PokemonApp() {
   function changeOpacity(value) {
     if (pokemons) {
       firstRef.current.style.opacity = secondRef.current.style.opacity = value;
-      headingRef.current.focus();
     }
   }
 
@@ -35,9 +33,7 @@ export default function PokemonApp() {
 
   return (
     <Layout>
-      <h1 className={styles.heading} ref={headingRef} tabIndex={0}>
-        Which Pokemon is Prettier?
-      </h1>
+      <h1 className={styles.heading}>Which Pokemon is Prettier?</h1>
       {pokemons ? (
         <div className={styles["pokemon-container"]}>
           <div ref={firstRef} className={styles.pokemon}>
