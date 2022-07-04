@@ -1,0 +1,38 @@
+$size: 10rem;
+
+.container {
+  background: #e1f6dc;
+  min-height: 100vh;
+}
+
+.heading {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1.7rem 0;
+}
+
+.exercises {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.exercise {
+  flex: 0 1 0;
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  margin: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: $size;
+  min-height: $size;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.35rem 0 rgb(185, 183, 183);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
