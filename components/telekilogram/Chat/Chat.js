@@ -7,10 +7,14 @@ export default function Chat({ title }) {
   const [messages, setMessages] = useState([]);
   const messagesRef = useRef();
 
-  useEffect(() => {
+  useEffect(scrollMessagesToBottom, [messages]);
+  useEffect(connectToServer, []);
+
+  function scrollMessagesToBottom() {
     messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
-  }, [messages]);
-  useEffect(() => {
+  }
+
+  function connectToServer() {
     const socket = SocketIOClient.connect("http://localhost:3000", {
       path: "/api/socketio",
     });
@@ -22,7 +26,7 @@ export default function Chat({ title }) {
     });
 
     return () => socket?.disconnect();
-  }, []);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
