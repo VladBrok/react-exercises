@@ -4,6 +4,7 @@ import SocketIOClient from "socket.io-client";
 import { makeMessage } from "../../../lib/telekilogram/makeMessage";
 import { post } from "../../../lib/telekilogram/post";
 import { formatMessage } from "../../../lib/telekilogram/formatMessage";
+import Form from "../Form";
 
 export default function Chat({ title, userName }) {
   const [messages, setMessages] = useState([]);
@@ -31,8 +32,6 @@ export default function Chat({ title, userName }) {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
-
     const input = e.target.elements.message;
     const messageText = input.value;
     if (!messageText) {
@@ -57,7 +56,7 @@ export default function Chat({ title, userName }) {
         {messagesList}
       </ul>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <Form className={styles.form} onSubmit={handleSubmit}>
         <input
           className={styles.input}
           type="text"
@@ -65,7 +64,7 @@ export default function Chat({ title, userName }) {
           name="message"
         />
         <button className={styles.send}>Send</button>
-      </form>
+      </Form>
     </div>
   );
 }

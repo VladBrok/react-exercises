@@ -1,5 +1,6 @@
 import styles from "./ModalWindow.module.scss";
 import Modal from "react-modal";
+import Form from "../Form";
 
 const customStyles = {
   content: {
@@ -18,16 +19,14 @@ const customStyles = {
 Modal.setAppElement("#__next");
 
 export default function ModalWindow({ onSubmit, isOpen, error }) {
-  // FIXME: dup with Chat
   function handleSubmit(e) {
-    e.preventDefault();
     onSubmit(e.target.elements.userName.value);
   }
 
   return (
     <Modal isOpen={isOpen} style={customStyles}>
       <h1 className={styles.heading}>Authorization</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <Form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="userName">Enter your name:</label>
         <input
           className={styles.input}
@@ -36,7 +35,7 @@ export default function ModalWindow({ onSubmit, isOpen, error }) {
           name="userName"
           autoFocus={true}
         />
-      </form>
+      </Form>
       <p className={styles.error}>{error}</p>
     </Modal>
   );
