@@ -5,7 +5,7 @@ import { makeMessage } from "../../../lib/telekilogram/makeMessage";
 import { post } from "../../../lib/telekilogram/post";
 import { formatMessage } from "../../../lib/telekilogram/formatMessage";
 
-export default function Chat({ title }) {
+export default function Chat({ title, userName }) {
   const [messages, setMessages] = useState([]);
   const messagesRef = useRef();
 
@@ -24,7 +24,7 @@ export default function Chat({ title }) {
       setMessages(current => [...current, message]);
     });
     socket.on("connect", () => {
-      socket.emit("join-chat", { name: "alkash" });
+      socket.emit("join-chat", { name: userName });
     });
 
     return () => socket?.disconnect();
@@ -40,7 +40,7 @@ export default function Chat({ title }) {
     }
 
     input.value = "";
-    post("send-message", makeMessage(messageText, "Anonymous"));
+    post("send-message", makeMessage(messageText, userName));
   }
 
   const messagesList = messages.map(m => (
