@@ -1,7 +1,9 @@
-import { nanoid } from "nanoid";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Chat.module.scss";
 import SocketIOClient from "socket.io-client";
+import { makeMessage } from "../../../lib/telekilogram/makeMessage";
+import { post } from "../../../lib/telekilogram/post";
+import { formatMessage } from "../../../lib/telekilogram/formatMessage";
 
 export default function Chat({ title }) {
   const [messages, setMessages] = useState([]);
@@ -18,11 +20,11 @@ export default function Chat({ title }) {
     const socket = SocketIOClient.connect("http://localhost:3000", {
       path: "/api/socketio",
     });
-    socket.on("connect", () => {
-      console.log("Connected to socket");
-    });
     socket.on("message", message => {
       setMessages(current => [...current, message]);
+    });
+    socket.on("connect", () => {
+      socket.emit("join-chat", { name: "alkash" });
     });
 
     return () => socket?.disconnect();
@@ -38,22 +40,13 @@ export default function Chat({ title }) {
     }
 
     input.value = "";
-    const message = {
-      id: nanoid(),
-      text: messageText,
-      from: "Anonymous",
-    };
-    fetch("/api/send-message", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
+    post("send-message", makeMessage(messageText, "Anonymous"));
   }
 
   const messagesList = messages.map(m => (
-    <li className={styles.message} key={m.id}>{`${m.from}: ${m.text}`}</li>
+    <li className={styles.message} key={m.id}>
+      {formatMessage(m)}
+    </li>
   ));
 
   return (
