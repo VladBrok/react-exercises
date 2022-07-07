@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Chat.module.scss";
 import SocketIOClient from "socket.io-client";
-import {
-  makeMessage,
-  MESSAGE_TYPES,
-} from "../../../lib/telekilogram/makeMessage";
+import { makeMessage } from "../../../lib/telekilogram/makeMessage";
 import { post } from "../../../lib/telekilogram/post";
 import Form from "../Form";
 import Message from "../Message";
@@ -16,7 +13,7 @@ export default function Chat({ title, userName }) {
   const inputRef = useRef();
 
   useEffect(scrollMessagesToBottom, [messages]);
-  useEffect(focus, []);
+  useEffect(focusOnInput, []);
   useEffect(() => {
     adjustMemberCount();
   });
@@ -26,7 +23,7 @@ export default function Chat({ title, userName }) {
     messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
   }
 
-  function focus() {
+  function focusOnInput() {
     inputRef.current?.focus();
   }
 
@@ -58,7 +55,7 @@ export default function Chat({ title, userName }) {
 
     input.value = "";
     post("send-message", makeMessage(messageText, userName));
-    inputRef.current.focus();
+    focusOnInput();
   }
 
   const messagesList = messages.map(m => (
