@@ -17,6 +17,9 @@ export default function Chat({ title, userName }) {
 
   useEffect(scrollMessagesToBottom, [messages]);
   useEffect(focus, []);
+  useEffect(() => {
+    adjustMemberCount();
+  });
   useEffect(connectToServer, []);
 
   function scrollMessagesToBottom() {
@@ -27,20 +30,17 @@ export default function Chat({ title, userName }) {
     inputRef.current?.focus();
   }
 
+  async function adjustMemberCount() {
+    const count = await (await fetch("/api/userCount")).json();
+    setMemberCount(count.value);
+  }
+
   function connectToServer() {
     const socket = SocketIOClient.connect("http://localhost:3000", {
       path: "/api/socketio",
     });
     socket.on("message", message => {
       setMessages(current => [...current, message]);
-      switch (message.type) {
-        case MESSAGE_TYPES.CONNECT:
-          setMemberCount(current => current + 1);
-          break;
-        case MESSAGE_TYPES.DISCONNECT:
-          setMemberCount(current => current - 1);
-          break;
-      }
     });
     socket.on("connect", () => {
       socket.emit("join-chat", { name: userName });
