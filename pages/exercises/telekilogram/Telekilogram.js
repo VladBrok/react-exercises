@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Chat from "../../../components/telekilogram/Chat";
 import ModalWindow from "../../../components/telekilogram/ModalWindow";
+import styles from "./Telekilogram.module.scss";
 import { useState } from "react";
 
 export default function Telekilogram() {
@@ -14,7 +15,7 @@ export default function Telekilogram() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
         <title>Telekilogram</title>
         <meta

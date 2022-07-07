@@ -1,0 +1,55 @@
+@use "/styles/mixins.scss" as m;
+$border: 1rem;
+
+@mixin message {
+  padding: 0.6rem 1rem;
+  margin: 0.25rem 0;
+  max-width: 65%;
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap; /* Opera <7 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* IE */
+}
+
+.info-message {
+  @include m.small-text;
+  text-align: center;
+  color: black;
+  margin: 0.4rem 0;
+
+  .time {
+    display: none;
+  }
+}
+
+.message-from-me {
+  @include message;
+  border-radius: $border 0 $border $border;
+  background: var(--telekilogram-primary-color);
+  align-self: flex-end;
+  color: white;
+
+  .user {
+    display: none;
+  }
+}
+
+.message-from-friend {
+  @include message;
+  border-radius: 0 $border $border $border;
+  background: white;
+  align-self: flex-start;
+  color: black;
+
+  .user {
+    color: #b08ebf;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 0.3rem;
+  }
+}
+
+.time {
+  @include m.small-text;
+}

@@ -1,6 +1,7 @@
 :root {
   --pokemon-app-primary-color: #1f2937;
   --pokemon-app-secondary-color: white;
+  --telekilogram-primary-color: #6088ad;
 }
 
 html,
@@ -29,7 +30,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+input {
   font-weight: normal;
   font-size: inherit;
 }

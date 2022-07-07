@@ -1,20 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Chat.module.scss";
 import SocketIOClient from "socket.io-client";
-import { makeMessage } from "../../../lib/telekilogram/makeMessage";
+import {
+  makeMessage,
+  MESSAGE_TYPES,
+} from "../../../lib/telekilogram/makeMessage";
 import { post } from "../../../lib/telekilogram/post";
-import { formatMessage } from "../../../lib/telekilogram/formatMessage";
 import Form from "../Form";
+import Message from "../Message";
 
 export default function Chat({ title, userName }) {
   const [messages, setMessages] = useState([]);
+  const [memberCount, setMemberCount] = useState(0);
   const messagesRef = useRef();
+  const inputRef = useRef();
 
   useEffect(scrollMessagesToBottom, [messages]);
+  useEffect(focus, []);
   useEffect(connectToServer, []);
 
   function scrollMessagesToBottom() {
     messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
+  }
+
+  function focus() {
+    inputRef.current?.focus();
   }
 
   function connectToServer() {
@@ -23,6 +33,14 @@ export default function Chat({ title, userName }) {
     });
     socket.on("message", message => {
       setMessages(current => [...current, message]);
+      switch (message.type) {
+        case MESSAGE_TYPES.CONNECT:
+          setMemberCount(current => current + 1);
+          break;
+        case MESSAGE_TYPES.DISCONNECT:
+          setMemberCount(current => current - 1);
+          break;
+      }
     });
     socket.on("connect", () => {
       socket.emit("join-chat", { name: userName });
@@ -40,17 +58,19 @@ export default function Chat({ title, userName }) {
 
     input.value = "";
     post("send-message", makeMessage(messageText, userName));
+    inputRef.current.focus();
   }
 
   const messagesList = messages.map(m => (
-    <li className={styles.message} key={m.id}>
-      {formatMessage(m)}
-    </li>
+    <Message message={m} userName={userName} key={m.id} />
   ));
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{title}</h1>
+      <section className={styles["title-container"]}>
+        <h1 className={styles.title}>{title}</h1>
+        <p className={styles.members}>{memberCount} members</p>
+      </section>
 
       <ul className={styles.messages} ref={messagesRef}>
         {messagesList}
@@ -62,6 +82,7 @@ export default function Chat({ title, userName }) {
           type="text"
           placeholder="Message"
           name="message"
+          ref={inputRef}
         />
         <button className={styles.send}>Send</button>
       </Form>

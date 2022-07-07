@@ -1,29 +1,75 @@
+@use "/styles/breakpoints.scss" as b;
+@use "/styles/mixins.scss" as m;
+$shadow-color: gray;
+
 .container {
   height: 100vh;
+  max-width: b.$xsm;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  font-size: 1.1rem;
+  box-shadow: 0 0 0.4rem 0 $shadow-color;
+
+  @media only screen and (min-width: b.$xsm) {
+    margin: 0 auto;
+  }
 }
 
 .messages {
   overflow-y: scroll;
-  border: 1px solid black;
-  margin: 0.2rem 0;
   flex-grow: 1;
+  background: linear-gradient(#cbcadd, #e4ded4);
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 }
 
-.message {
+.title-container {
+  color: white;
+  background: var(--telekilogram-primary-color);
+  text-align: center;
+  padding: 0.6rem 0;
+  line-height: 1;
 }
 
 .title {
+  font-weight: 600;
+}
+
+.members {
+  @include m.small-text;
 }
 
 .form {
+  display: flex;
+  box-shadow: 0 0 0.2rem 0 $shadow-color;
+  background-color: white;
 }
 
 .input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 0.8rem 1.2rem;
 }
 
 .send {
+  background: center / contain no-repeat url("/images/paper-plane.png");
+  color: transparent;
+  margin-right: 1.2rem;
+
+  &:hover {
+    filter: drop-shadow(0 0 0.2rem var(--telekilogram-primary-color));
+  }
+
+  &:active {
+    transform: scale(90%);
+  }
 }
