@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Chat from "../../../components/telekilogram/Chat";
-import ModalWindow from "../../../components/telekilogram/ModalWindow";
+import AuthorizationWindow from "../../../components/telekilogram/AuthorizationWindow";
 import styles from "./Telekilogram.module.scss";
 import { useState } from "react";
 import { getErrorMessage } from "../../../lib/telekilogram/getErrorMessage";
@@ -24,7 +24,7 @@ export default function Telekilogram() {
           content="Meet Telekilogram - new, fast, reliable messenger"
         />
       </Head>
-      <ModalWindow
+      <AuthorizationWindow
         onSubmit={handleSubmit}
         isOpen={Boolean(inputError)}
         error={inputError}
