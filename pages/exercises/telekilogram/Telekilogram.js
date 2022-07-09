@@ -3,14 +3,15 @@ import Chat from "../../../components/telekilogram/Chat";
 import ModalWindow from "../../../components/telekilogram/ModalWindow";
 import styles from "./Telekilogram.module.scss";
 import { useState } from "react";
+import { getErrorMessage } from "../../../lib/telekilogram/getErrorMessage";
 
 export default function Telekilogram() {
   const [userName, setUserName] = useState();
-  const [error, setError] = useState(true);
+  const [inputError, setInputError] = useState(true);
 
   async function handleSubmit(userName) {
     const error = await getErrorMessage(userName);
-    setError(error);
+    setInputError(error);
     setUserName(userName);
   }
 
@@ -25,25 +26,10 @@ export default function Telekilogram() {
       </Head>
       <ModalWindow
         onSubmit={handleSubmit}
-        isOpen={Boolean(error)}
-        error={error}
+        isOpen={Boolean(inputError)}
+        error={inputError}
       />
-      {!error && <Chat title="Public chat" userName={userName} />}
+      {!inputError && <Chat title="Public chat" userName={userName} />}
     </div>
   );
-}
-
-async function getErrorMessage(userName) {
-  if (!userName) {
-    return "Name should not be empty";
-  }
-
-  const alreadyInChat = await (
-    await fetch(`/api/alreadyInChat/${userName}`)
-  ).json();
-  if (alreadyInChat.yes) {
-    return `User with the name ${userName} is already in the chat`;
-  }
-
-  return null;
 }

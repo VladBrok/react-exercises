@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { handleConnection } from "../../lib/telekilogram/chat";
+import { handleConnection } from "../../lib/telekilogram/chat-server";
 
 export default function handler(_, res) {
   const httpServer = res.socket.server;

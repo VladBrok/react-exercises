@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Chat.module.scss";
-import SocketIOClient from "socket.io-client";
 import { makeMessage } from "../../../lib/telekilogram/makeMessage";
 import { post } from "../../../lib/telekilogram/post";
 import Form from "../Form";
 import Message from "../Message";
+import { connect } from "../../../lib/telekilogram/chat-client";
 
 export default function Chat({ title, userName }) {
   const [messages, setMessages] = useState([]);
@@ -33,17 +33,9 @@ export default function Chat({ title, userName }) {
   }
 
   function connectToServer() {
-    const socket = SocketIOClient.connect("http://localhost:3000", {
-      path: "/api/socketio",
-    });
-    socket.on("message", message => {
+    return connect({ name: userName }, message => {
       setMessages(current => [...current, message]);
     });
-    socket.on("connect", () => {
-      socket.emit("join-chat", { name: userName });
-    });
-
-    return () => socket?.disconnect();
   }
 
   function handleSubmit(e) {
