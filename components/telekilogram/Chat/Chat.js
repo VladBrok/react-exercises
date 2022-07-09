@@ -5,10 +5,12 @@ import { post } from "../../../lib/telekilogram/post";
 import Form from "../Form";
 import Message from "../Message";
 import { connect } from "../../../lib/telekilogram/chat-client";
+import ErrorWindow from "../ErrorWindow";
 
 export default function Chat({ title, userName }) {
   const [messages, setMessages] = useState([]);
   const [memberCount, setMemberCount] = useState(0);
+  const [error, setError] = useState(false);
   const messagesRef = useRef();
   const inputRef = useRef();
 
@@ -28,17 +30,30 @@ export default function Chat({ title, userName }) {
   }
 
   async function adjustMemberCount() {
-    const count = await (await fetch("/api/userCount")).json();
-    setMemberCount(count.value);
+    try {
+      const count = await (await fetch("/api/userCount")).json();
+      setMemberCount(count.value);
+    } catch (error) {
+      handleError(error);
+    }
   }
 
   function connectToServer() {
-    return connect({ name: userName }, message => {
-      setMessages(current => [...current, message]);
-    });
+    return connect(
+      { name: userName },
+      message => {
+        setMessages(current => [...current, message]);
+      },
+      handleError
+    );
+  }
+
+  function handleError() {
+    setError(true);
   }
 
   function handleSubmit(e) {
+    focusOnInput();
     const input = e.target.elements.message;
     const messageText = input.value;
     if (!messageText) {
@@ -46,8 +61,9 @@ export default function Chat({ title, userName }) {
     }
 
     input.value = "";
-    post("send-message", makeMessage(messageText, userName));
-    focusOnInput();
+    post("send-message", makeMessage(messageText, userName)).catch(() =>
+      handleError(error)
+    );
   }
 
   const messagesList = messages.map(m => (
@@ -75,6 +91,11 @@ export default function Chat({ title, userName }) {
         />
         <button className={styles.send}>Send</button>
       </Form>
+
+      <ErrorWindow
+        message="Unable to connect to the server. Please, try again later :)"
+        isOpen={error}
+      />
     </div>
   );
 }

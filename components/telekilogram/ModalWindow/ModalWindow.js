@@ -1,6 +1,5 @@
 import styles from "./ModalWindow.module.scss";
 import Modal from "react-modal";
-import Form from "../Form";
 
 const customStyles = {
   content: {
@@ -18,25 +17,11 @@ const customStyles = {
 
 Modal.setAppElement("#__next");
 
-export default function ModalWindow({ onSubmit, isOpen, error }) {
-  function handleSubmit(e) {
-    onSubmit(e.target.elements.userName.value);
-  }
-
+export default function ModalWindow({ heading, isOpen, children }) {
   return (
     <Modal isOpen={isOpen} style={customStyles}>
-      <h1 className={styles.heading}>Authorization</h1>
-      <Form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor="userName">Enter your name:</label>
-        <input
-          className={styles.input}
-          type="text"
-          id="userName"
-          name="userName"
-          autoFocus={true}
-        />
-      </Form>
-      <p className={styles.error}>{error}</p>
+      <h1 className={styles.heading}>{heading}</h1>
+      {children}
     </Modal>
   );
 }
