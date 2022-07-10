@@ -14,12 +14,12 @@ export default function Chat({ title, userName }) {
   const messagesRef = useRef();
   const inputRef = useRef();
 
+  useEffect(connectToServer, []);
   useEffect(scrollMessagesToBottom, [messages]);
   useEffect(focusOnInput, []);
   useEffect(() => {
     adjustMemberCount();
   });
-  useEffect(connectToServer, []);
 
   function scrollMessagesToBottom() {
     messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
@@ -34,7 +34,7 @@ export default function Chat({ title, userName }) {
       const count = await (await fetch("/api/userCount")).json();
       setMemberCount(count.value);
     } catch (error) {
-      handleError(error);
+      handleError(error, "userCount fetch");
     }
   }
 
@@ -44,11 +44,13 @@ export default function Chat({ title, userName }) {
       message => {
         setMessages(current => [...current, message]);
       },
-      handleError
+      error => handleError(error, "connect"),
+      adjustMemberCount
     );
   }
 
-  function handleError() {
+  function handleError(error, cause) {
+    console.log(error, `CAUSED BY: ${cause}`);
     setError(true);
   }
 
@@ -62,7 +64,7 @@ export default function Chat({ title, userName }) {
 
     input.value = "";
     post("send-message", makeMessage(messageText, userName)).catch(() =>
-      handleError(error)
+      handleError(error, "post request")
     );
   }
 
