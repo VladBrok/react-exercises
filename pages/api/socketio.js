@@ -6,6 +6,7 @@ let initializing = false;
 
 export default async function handler(_, res) {
   const httpServer = res.socket.server;
+  console.log(httpServer);
 
   if (!httpServer.io && !initializing) {
     initializing = true;
