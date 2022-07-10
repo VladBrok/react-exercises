@@ -1,23 +1,18 @@
-import fs from "fs/promises";
-import path from "path";
+import { save, load, RESOURCES } from "../../../lib/storage";
 
-const file = path.join(process.cwd(), "data/pokemon-app/pokemon-votes.json");
+const RESOURCE = RESOURCES.POKEMON_VOTES;
 
 export default async function handler(req, res) {
-  const buffer = await fs.readFile(file);
-  const json = buffer.toString();
-  const votes = JSON.parse(json);
-
+  const votes = await load(RESOURCE);
   const id = req.query.id;
   const vote = votes.find(v => v.id === id);
+
   if (!vote) {
     votes.push({ id, voteCount: 1 });
   } else {
     vote.voteCount += 1;
   }
 
-  const resultJson = JSON.stringify(votes);
-  await fs.writeFile(file, resultJson);
-
+  await save(votes, RESOURCE);
   res.status(200).json("");
 }

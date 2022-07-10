@@ -1,10 +1,6 @@
-import fs from "fs/promises";
-import path from "path";
-
-const file = path.join(process.cwd(), "data/pokemon-app/pokemon-votes.json");
+import { load, RESOURCES } from "../../lib/storage";
 
 export default async function handler(_, res) {
-  const buffer = await fs.readFile(file);
-  const json = buffer.toString();
+  const json = JSON.stringify(await load(RESOURCES.POKEMON_VOTES));
   return res.status(200).json(json);
 }
