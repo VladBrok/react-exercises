@@ -5,8 +5,37 @@ import Question from "../../../components/big-quiz/Question";
 import Summary from "../../../components/big-quiz/Summary";
 import Category from "../../../components/big-quiz/Category";
 import Settings from "../../../components/big-quiz/Settings";
+import { FaLinux } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io";
+import { FaHtml5 } from "react-icons/fa";
+import { SiGnubash } from "react-icons/si";
+import { FaDocker } from "react-icons/fa";
+
+const CATEGORIES = [
+  { name: "linux", icon: FaLinux },
+  { name: "JavaScript", icon: IoLogoJavascript },
+  { name: "html", icon: FaHtml5 },
+  { name: "bash", icon: SiGnubash },
+  { name: "docker", icon: FaDocker },
+];
 
 export default function BigQuiz() {
+  const [category, setCategory] = useState();
+  const [difficulty, setDifficulty] = useState();
+  const [limit, setLimit] = useState();
+
+  function handleCategoryClick(value) {
+    setCategory(value);
+    console.log(value);
+  }
+
+  function handleStartClick(difficultyValue, limitValue) {
+    setDifficulty(difficultyValue);
+    setLimit(limitValue);
+    console.log(difficultyValue);
+    console.log(limitValue);
+  }
+
   // const [questions, setQuestions] = useState();
 
   // useEffect(() => {
@@ -19,6 +48,15 @@ export default function BigQuiz() {
   //   getQuestions();
   // }, []);
 
+  const categories = CATEGORIES.map(c => (
+    <Category
+      key={c.name}
+      name={c.name}
+      Icon={c.icon}
+      onClick={handleCategoryClick}
+    />
+  ));
+
   return (
     <div>
       <Head>
@@ -29,13 +67,23 @@ export default function BigQuiz() {
         />
       </Head>
 
-      <Category name="Linux" Icon={() => <div>Icon :)</div>} />
+      {!category && (
+        <>
+          <div>
+            <h1>Answer the most interesting tech questions!</h1>
+          </div>
+          <section>
+            <h2>Categories</h2>
+            <div>{categories}</div>
+          </section>
+        </>
+      )}
 
-      <Settings />
+      {category && !difficulty && <Settings onStartClick={handleStartClick} />}
 
       <Question
-        number={2}
-        total={5}
+        number={1}
+        total={limit}
         correctAnswers={[{ id: 1 }]}
         description="Time's up. Answer?"
         possibleAnswers={[
@@ -46,10 +94,10 @@ export default function BigQuiz() {
       />
 
       <Summary
-        category="Linux"
+        category={category}
         correctAnswers={2}
-        totalAnswers={5}
-        difficulty="medium"
+        totalAnswers={limit}
+        difficulty={difficulty}
       />
     </div>
   );
