@@ -8,8 +8,8 @@
 .pokemon-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   justify-content: center;
   width: 80%;
   margin: 0 auto;
@@ -20,9 +20,9 @@
 }
 
 .highlight {
-  font-style: italic;
-  font-size: 1.1rem;
   margin: 1.7rem 0;
+  font-size: 1.1rem;
+  font-style: italic;
 }
 
 .pokemon {
@@ -30,10 +30,10 @@
 }
 
 .link {
-  text-decoration: underline;
   display: block;
   margin-top: 0.8rem;
   font-size: 1.2rem;
+  text-decoration: underline;
 
   &:hover {
     text-decoration: none;

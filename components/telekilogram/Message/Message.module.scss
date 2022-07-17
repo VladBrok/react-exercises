@@ -2,9 +2,9 @@
 $border: 1rem;
 
 @mixin message {
-  padding: 0.6rem 1rem;
-  margin: 0.25rem 0;
   max-width: 65%;
+  margin: 0.25rem 0;
+  padding: 0.6rem 1rem;
   white-space: pre-wrap; /* CSS3 */
   white-space: -moz-pre-wrap; /* Firefox */
   white-space: -pre-wrap; /* Opera <7 */
@@ -14,9 +14,9 @@ $border: 1rem;
 
 .info-message {
   @include m.small-text;
-  text-align: center;
-  color: black;
   margin: 0.4rem 0;
+  color: black;
+  text-align: center;
 
   .time {
     display: none;
@@ -25,10 +25,10 @@ $border: 1rem;
 
 .message-from-me {
   @include message;
-  border-radius: $border 0 $border $border;
-  background: var(--telekilogram-primary-color);
   align-self: flex-end;
   color: white;
+  background: var(--telekilogram-primary-color);
+  border-radius: $border 0 $border $border;
 
   .user {
     display: none;
@@ -37,16 +37,16 @@ $border: 1rem;
 
 .message-from-friend {
   @include message;
-  border-radius: 0 $border $border $border;
-  background: white;
   align-self: flex-start;
   color: black;
+  background: white;
+  border-radius: 0 $border $border $border;
 
   .user {
-    color: #b08ebf;
-    font-weight: 600;
     display: inline-block;
     margin-right: 0.3rem;
+    color: #b08ebf;
+    font-weight: 600;
   }
 }
 

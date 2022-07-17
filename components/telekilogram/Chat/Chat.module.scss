@@ -3,11 +3,11 @@
 $shadow-color: gray;
 
 .container {
-  height: 100vh;
-  max-width: b.$xsm;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: b.$xsm;
+  height: 100vh;
   font-size: 1.1rem;
   box-shadow: 0 0 0.4rem 0 $shadow-color;
 
@@ -17,12 +17,12 @@ $shadow-color: gray;
 }
 
 .messages {
-  overflow-y: scroll;
-  flex-grow: 1;
-  background: linear-gradient(#cbcadd, #e4ded4);
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   padding: 0.4rem;
+  overflow-y: scroll;
+  background: linear-gradient(#cbcadd, #e4ded4);
 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
@@ -32,11 +32,11 @@ $shadow-color: gray;
 }
 
 .title-container {
-  color: white;
-  background: var(--telekilogram-primary-color);
-  text-align: center;
   padding: 0.6rem 0;
+  color: white;
   line-height: 1;
+  text-align: center;
+  background: var(--telekilogram-primary-color);
 }
 
 .title {
@@ -49,21 +49,21 @@ $shadow-color: gray;
 
 .form {
   display: flex;
-  box-shadow: 0 0 0.2rem 0 $shadow-color;
   background-color: white;
+  box-shadow: 0 0 0.2rem 0 $shadow-color;
 }
 
 .input {
-  border: none;
-  outline: none;
   flex-grow: 1;
   padding: 0.8rem 1.2rem;
+  border: none;
+  outline: none;
 }
 
 .send {
-  background: center / contain no-repeat url("/images/paper-plane.png");
-  color: transparent;
   margin-right: 1.2rem;
+  color: transparent;
+  background: center / contain no-repeat url("/images/paper-plane.png");
 
   &:hover {
     filter: drop-shadow(0 0 0.2rem var(--telekilogram-primary-color));

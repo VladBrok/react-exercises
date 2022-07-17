@@ -1,14 +1,14 @@
 $size: 10rem;
 
 .container {
-  background: #e1f6dc;
   min-height: 100vh;
+  background: #e1f6dc;
 }
 
 .heading {
-  text-align: center;
-  font-size: 1.5rem;
   padding: 1.7rem 0;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .exercises {
@@ -19,11 +19,11 @@ $size: 10rem;
 
 .exercise {
   flex: 0 1 0;
-  font-size: 1.2rem;
-  padding: 0.4rem;
-  margin: 0.7rem;
   min-width: $size;
   min-height: $size;
+  margin: 0.7rem;
+  padding: 0.4rem;
+  font-size: 1.2rem;
   background: white;
   border-radius: 1rem;
   box-shadow: 0 0 0.35rem 0 rgb(185, 183, 183);
@@ -36,10 +36,10 @@ $size: 10rem;
 
 .link {
   display: block;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   text-align: center;
 }
