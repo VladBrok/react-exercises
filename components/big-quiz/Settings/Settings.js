@@ -1,19 +1,25 @@
 import styles from "./Settings.module.scss";
 import Checkbox from "../Checkbox";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const DIFFICULTIES = ["easy", "medium", "hard"];
 
 export default function Settings({ onStartClick }) {
   const [difficultyId, setDifficultyId] = useState(DIFFICULTIES[0]);
-  const limitRef = useRef();
+  const [limit, setLimit] = useState("10");
 
-  function handleChecked(id) {
-    setDifficultyId(id);
+  function handleCheckedChange(id, isChecked) {
+    if (isChecked) {
+      setDifficultyId(id);
+    }
   }
 
   function handleStartClick() {
-    onStartClick(difficultyId, limitRef.current?.value);
+    onStartClick(difficultyId, limit);
+  }
+
+  function handleLimitChange(e) {
+    setLimit(e.target.value);
   }
 
   const difficulties = DIFFICULTIES.map(d => ({ id: d, text: d }));
@@ -24,8 +30,8 @@ export default function Settings({ onStartClick }) {
         description="Difficulty:"
         hasMultipleOptions={false}
         options={difficulties}
-        checkedId={difficultyId}
-        onChecked={handleChecked}
+        checkedIds={[difficultyId]}
+        onCheckedChange={handleCheckedChange}
       />
       <div>
         <label htmlFor="limit">Questions limit:</label>
@@ -35,11 +41,13 @@ export default function Settings({ onStartClick }) {
           max="20"
           id="limit"
           name="limit"
-          defaultValue={2}
-          ref={limitRef}
+          value={limit}
+          onChange={handleLimitChange}
         />
       </div>
-      <button onClick={handleStartClick}>Let's Go!</button>
+      <button onClick={handleStartClick} disabled={!limit}>
+        Let's Go!
+      </button>
     </div>
   );
 }
