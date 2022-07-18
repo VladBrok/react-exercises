@@ -6,14 +6,15 @@ import Category from "../../../components/big-quiz/Category";
 import Settings from "../../../components/big-quiz/Settings";
 import Quiz from "../../../components/big-quiz/Quiz";
 import { FaLinux } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io";
+import { FaDatabase } from "react-icons/fa";
 import { FaHtml5 } from "react-icons/fa";
-import { SiGnubash } from "react-icons/si";
+import { SiGnubash, SiJavascript } from "react-icons/si";
 import { FaDocker } from "react-icons/fa";
 
 const CATEGORIES = [
   { name: "linux", icon: FaLinux },
-  { name: "JavaScript", icon: IoLogoJavascript },
+  { name: "JavaScript", icon: SiJavascript },
+  { name: "MySql", icon: FaDatabase },
   { name: "html", icon: FaHtml5 },
   { name: "bash", icon: SiGnubash },
   { name: "docker", icon: FaDocker },

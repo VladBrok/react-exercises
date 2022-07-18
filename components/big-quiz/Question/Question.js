@@ -1,5 +1,6 @@
 import styles from "./Question.module.scss";
 import Checkbox from "../Checkbox/Checkbox";
+import { useState } from "react";
 
 export default function Question({
   description,
@@ -8,7 +9,15 @@ export default function Question({
   hasMultipleAnswers,
   onQuitClick,
 }) {
-  function handleCheckClick() {}
+  const [answerId, setAnswerId] = useState();
+
+  function handleCheckClick() {
+    if (correctAnswers.find(c => c.id === answerId)) {
+      console.log("correct!");
+    } else {
+      console.log("wrong");
+    }
+  }
 
   return (
     <div>
@@ -16,11 +25,15 @@ export default function Question({
         description={description}
         hasMultipleOptions={hasMultipleAnswers}
         options={possibleAnswers}
+        checkedId={answerId}
+        onChecked={setAnswerId}
       />
 
       <div>
         <button onClick={onQuitClick}>Quit Quiz</button>
-        <button onClick={handleCheckClick}>Check</button>
+        <button onClick={handleCheckClick} disabled={!answerId}>
+          Check
+        </button>
       </div>
     </div>
   );

@@ -9,8 +9,9 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   useEffect(() => {
     async function getQuestions() {
       const response = await fetch(
-        `/api/questions?limit=${limit}&difficulty=${difficulty}&category=${category}`
+        `/api/questions?limit=${limit}&difficulty=${difficulty}&tags=${category}`
       );
+      console.log(response.status);
       setQuestions(await response.json());
     }
     getQuestions();
@@ -46,7 +47,7 @@ function extractCorrectAnswers(question) {
   return Object.keys(question.correct_answers)
     .filter(k => question.correct_answers[k] === "true")
     .map(k => ({
-      id: k,
+      id: k.replace("_correct", ""),
     }));
 }
 
