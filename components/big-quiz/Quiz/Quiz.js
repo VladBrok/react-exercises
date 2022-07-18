@@ -43,6 +43,7 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   }
 
   const question = questions[current];
+  console.log(question);
   const questionElement = (
     <>
       <header>

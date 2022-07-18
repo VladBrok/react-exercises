@@ -10,24 +10,20 @@ export default function Question({
   onQuitClick,
   onNextClick,
 }) {
-  const [answerId, setAnswerId] = useState();
+  const [answerIds, setAnswerIds] = useState([]);
   const [isCorrect, setIsCorrect] = useState();
   const checkButtonRef = useRef();
   const nextButtonRef = useRef();
 
   useEffect(() => {
-    setAnswerId();
+    setAnswerIds([]);
     setIsCorrect();
   }, [description]);
 
   useEffect(() => {
     function handleKeydown(e) {
-      if (e.ctrlKey && e.code === "ArrowRight" && answerId) {
-        const toClick =
-          checkButtonRef.current?.style.display === "none"
-            ? nextButtonRef
-            : checkButtonRef;
-        toClick.current?.click();
+      if (e.ctrlKey && e.code === "ArrowRight" && answerIds.length) {
+        clickButton();
         return;
       }
 
@@ -35,16 +31,36 @@ export default function Question({
         onQuitClick();
       }
     }
+
+    function clickButton() {
+      const toClick =
+        checkButtonRef.current?.style.display === "none"
+          ? nextButtonRef
+          : checkButtonRef;
+      toClick.current?.click();
+    }
+
     document.addEventListener("keydown", handleKeydown);
     return () => document.removeEventListener("keydown", handleKeydown);
-  }, [answerId]);
+  }, [answerIds]);
 
   function handleCheckClick() {
-    setIsCorrect(correctAnswers.find(c => c.id === answerId) != undefined);
+    setIsCorrect(
+      correctAnswers.length === answerIds.length &&
+        correctAnswers.every(c => answerIds.includes(c.id))
+    );
+  }
+
+  function handleCheckedChange(answerId, isChecked) {
+    if (isChecked) {
+      setAnswerIds(ids => [...ids, answerId]);
+    } else {
+      setAnswerIds(ids => ids.filter(id => id !== answerId));
+    }
   }
 
   const checkButtonDisplay =
-    answerId && isCorrect != undefined ? "none" : "block";
+    answerIds.length && isCorrect != undefined ? "none" : "block";
   const nextButtonDisplay = checkButtonDisplay === "none" ? "block" : "none";
   const resultVisibility = isCorrect == undefined ? "hidden" : "visible";
   const resultText = isCorrect ? "Correct!" : "Wrong.";
@@ -55,8 +71,8 @@ export default function Question({
         description={description}
         hasMultipleOptions={hasMultipleAnswers}
         options={possibleAnswers}
-        checkedId={answerId}
-        onChecked={setAnswerId}
+        checkedIds={answerIds}
+        onCheckedChange={handleCheckedChange}
       />
 
       <div>
@@ -64,7 +80,7 @@ export default function Question({
         <button onClick={onQuitClick}>Quit Quiz (Esc)</button>
         <button
           onClick={handleCheckClick}
-          disabled={!answerId}
+          disabled={!answerIds.length}
           style={{ display: checkButtonDisplay }}
           ref={checkButtonRef}
         >

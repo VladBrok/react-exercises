@@ -1,6 +1,6 @@
 import styles from "./BigQuiz.module.scss";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Category from "../../../components/big-quiz/Category";
 import Settings from "../../../components/big-quiz/Settings";
 import Quiz from "../../../components/big-quiz/Quiz";

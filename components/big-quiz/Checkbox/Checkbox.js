@@ -1,15 +1,15 @@
-import { useId, useState } from "react";
 import styles from "./Checkbox.module.scss";
+import { useId, useState } from "react";
 
 export default function Checkbox({
   description,
   hasMultipleOptions,
   options,
-  checkedId,
-  onChecked,
+  checkedIds,
+  onCheckedChange,
 }) {
   const name = useId();
-  console.log(hasMultipleOptions);
+
   const inputType = hasMultipleOptions ? "checkbox" : "radio";
   const optionElements = options.map(o => (
     <div key={o.id}>
@@ -18,11 +18,9 @@ export default function Checkbox({
         type={inputType}
         id={o.id}
         name={name}
-        checked={o.id === checkedId}
+        checked={checkedIds.includes(o.id)}
         onChange={e => {
-          if (e.target.checked) {
-            onChecked(o.id);
-          }
+          onCheckedChange(o.id, e.target.checked);
         }}
       />
     </div>
