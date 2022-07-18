@@ -6,7 +6,6 @@ export default function Question({
   description,
   possibleAnswers,
   correctAnswers,
-  explanation,
   hasMultipleAnswers,
   onQuitClick,
   onNextClick,
@@ -20,14 +19,14 @@ export default function Question({
   }, [description]);
 
   function handleCheckClick() {
-    setIsCorrect(correctAnswers.find(c => c.id === answerId));
-    // console.log("Correct!");
-    // console.log(`Wrong. ${explanation}`);
+    setIsCorrect(correctAnswers.find(c => c.id === answerId) != undefined);
   }
 
   const checkButtonDisplay =
     answerId && isCorrect != undefined ? "none" : "block";
   const nextButtonDisplay = checkButtonDisplay === "none" ? "block" : "none";
+  const resultVisibility = isCorrect == undefined ? "hidden" : "visible";
+  const resultText = isCorrect ? "Correct!" : "Wrong.";
 
   return (
     <div>
@@ -40,6 +39,7 @@ export default function Question({
       />
 
       <div>
+        <p style={{ visibility: resultVisibility }}>{resultText}</p>
         <button onClick={onQuitClick}>Quit Quiz</button>
         <button
           onClick={handleCheckClick}
