@@ -26,14 +26,11 @@ export default function BigQuiz() {
 
   function handleCategoryClick(value) {
     setCategory(value);
-    console.log(value);
   }
 
   function handleStartClick(difficultyValue, limitValue) {
     setDifficulty(difficultyValue);
     setLimit(limitValue);
-    console.log(difficultyValue);
-    console.log(limitValue);
   }
 
   function handleQuitClick() {

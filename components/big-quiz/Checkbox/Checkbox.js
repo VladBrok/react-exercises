@@ -9,6 +9,7 @@ export default function Checkbox({
   onChecked,
 }) {
   const name = useId();
+  console.log(hasMultipleOptions);
   const inputType = hasMultipleOptions ? "checkbox" : "radio";
   const optionElements = options.map(o => (
     <div key={o.id}>

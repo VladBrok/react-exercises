@@ -1,6 +1,6 @@
 import styles from "./Question.module.scss";
 import Checkbox from "../Checkbox/Checkbox";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Question({
   description,
@@ -12,11 +12,32 @@ export default function Question({
 }) {
   const [answerId, setAnswerId] = useState();
   const [isCorrect, setIsCorrect] = useState();
+  const checkButtonRef = useRef();
+  const nextButtonRef = useRef();
 
   useEffect(() => {
     setAnswerId();
     setIsCorrect();
   }, [description]);
+
+  useEffect(() => {
+    function handleKeydown(e) {
+      if (e.ctrlKey && e.code === "ArrowRight" && answerId) {
+        const toClick =
+          checkButtonRef.current?.style.display === "none"
+            ? nextButtonRef
+            : checkButtonRef;
+        toClick.current?.click();
+        return;
+      }
+
+      if (e.code === "Escape") {
+        onQuitClick();
+      }
+    }
+    document.addEventListener("keydown", handleKeydown);
+    return () => document.removeEventListener("keydown", handleKeydown);
+  }, [answerId]);
 
   function handleCheckClick() {
     setIsCorrect(correctAnswers.find(c => c.id === answerId) != undefined);
@@ -40,19 +61,21 @@ export default function Question({
 
       <div>
         <p style={{ visibility: resultVisibility }}>{resultText}</p>
-        <button onClick={onQuitClick}>Quit Quiz</button>
+        <button onClick={onQuitClick}>Quit Quiz (Esc)</button>
         <button
           onClick={handleCheckClick}
           disabled={!answerId}
           style={{ display: checkButtonDisplay }}
+          ref={checkButtonRef}
         >
-          Check
+          {"Check (Ctrl + ->)"}
         </button>
         <button
           onClick={() => onNextClick(isCorrect)}
           style={{ display: nextButtonDisplay }}
+          ref={nextButtonRef}
         >
-          Next
+          {"Next (Ctrl + ->)"}
         </button>
       </div>
     </div>
