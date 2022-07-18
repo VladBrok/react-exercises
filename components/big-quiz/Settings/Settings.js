@@ -46,7 +46,7 @@ export default function Settings({ onStartClick }) {
         />
       </div>
       <button onClick={handleStartClick} disabled={!limit}>
-        Let's Go!
+        Let&apos;s Go!
       </button>
     </div>
   );
