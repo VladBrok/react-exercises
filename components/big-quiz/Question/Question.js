@@ -48,7 +48,10 @@ export default function Question({
         >
           Check
         </button>
-        <button onClick={onNextClick} style={{ display: nextButtonDisplay }}>
+        <button
+          onClick={() => onNextClick(isCorrect)}
+          style={{ display: nextButtonDisplay }}
+        >
           Next
         </button>
       </div>

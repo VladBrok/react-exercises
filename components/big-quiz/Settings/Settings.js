@@ -35,7 +35,7 @@ export default function Settings({ onStartClick }) {
           max="20"
           id="limit"
           name="limit"
-          defaultValue={10}
+          defaultValue={2}
           ref={limitRef}
         />
       </div>

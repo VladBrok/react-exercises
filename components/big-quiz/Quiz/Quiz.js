@@ -1,10 +1,12 @@
 import styles from "./Quiz.module.scss";
 import Question from "../Question";
+import Summary from "../Summary";
 import { useEffect, useState } from "react";
 
 export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   const [questions, setQuestions] = useState();
   const [current, setCurrent] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
 
   useEffect(() => {
     async function getQuestions() {
@@ -17,12 +19,27 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
     getQuestions();
   }, []);
 
-  function handleNextClick() {
+  function handleNextClick(isCorrect) {
+    if (isCorrect) {
+      setCorrectCount(cur => cur + 1);
+    }
     setCurrent(cur => cur + 1);
   }
 
   if (!questions) {
-    return <div></div>;
+    return <div>Loading...</div>;
+  }
+
+  if (current >= questions.length) {
+    return (
+      <Summary
+        correctAnswers={correctCount}
+        category={category}
+        totalAnswers={limit}
+        difficulty={difficulty}
+        onTakeNewQuizClick={onQuitClick}
+      />
+    );
   }
 
   const question = questions[current];

@@ -27,7 +27,7 @@ export default function Summary({
         </p>
       </header>
 
-      <p>Your score</p>
+      <p>Your score:</p>
       <span>{correctAnswers}</span>
       <span>/{totalAnswers}</span>
 

@@ -1,7 +1,6 @@
 import styles from "./BigQuiz.module.scss";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import Summary from "../../../components/big-quiz/Summary";
 import Category from "../../../components/big-quiz/Category";
 import Settings from "../../../components/big-quiz/Settings";
 import Quiz from "../../../components/big-quiz/Quiz";
@@ -12,12 +11,12 @@ import { SiGnubash, SiJavascript } from "react-icons/si";
 import { FaDocker } from "react-icons/fa";
 
 const CATEGORIES = [
-  { name: "linux", icon: FaLinux },
+  { name: "Linux", icon: FaLinux },
   { name: "JavaScript", icon: SiJavascript },
   { name: "MySql", icon: FaDatabase },
-  { name: "html", icon: FaHtml5 },
-  { name: "bash", icon: SiGnubash },
-  { name: "docker", icon: FaDocker },
+  { name: "HTML", icon: FaHtml5 },
+  { name: "Bash", icon: SiGnubash },
+  { name: "Docker", icon: FaDocker },
 ];
 
 export default function BigQuiz() {
@@ -82,13 +81,6 @@ export default function BigQuiz() {
           {...{ category, difficulty, limit }}
         />
       )}
-
-      <Summary
-        category={category}
-        correctAnswers={2}
-        totalAnswers={limit}
-        difficulty={difficulty}
-      />
     </div>
   );
 }
