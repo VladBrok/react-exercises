@@ -17,6 +17,10 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
     getQuestions();
   }, []);
 
+  function handleNextClick() {
+    setCurrent(cur => cur + 1);
+  }
+
   if (!questions) {
     return <div></div>;
   }
@@ -34,8 +38,10 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
         correctAnswers={extractCorrectAnswers(question)}
         description={question.question}
         possibleAnswers={extractPossibleAnswers(question)}
+        explanation={question.explanation}
         hasMultipleAnswers={question.multiple_correct_answers === "true"}
         onQuitClick={onQuitClick}
+        onNextClick={handleNextClick}
       />
     </>
   );
