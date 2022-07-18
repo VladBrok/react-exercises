@@ -1,10 +1,10 @@
 import styles from "./BigQuiz.module.scss";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import Question from "../../../components/big-quiz/Question";
 import Summary from "../../../components/big-quiz/Summary";
 import Category from "../../../components/big-quiz/Category";
 import Settings from "../../../components/big-quiz/Settings";
+import Quiz from "../../../components/big-quiz/Quiz";
 import { FaLinux } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
 import { FaHtml5 } from "react-icons/fa";
@@ -36,17 +36,11 @@ export default function BigQuiz() {
     console.log(limitValue);
   }
 
-  // const [questions, setQuestions] = useState();
-
-  // useEffect(() => {
-  //   async function getQuestions() {
-  //     const response = await fetch(
-  //       `/api/questions?limit=1&difficulty=${DIFFICULTIES.HARD}&category=linu`
-  //     );
-  //     setQuestions(await response.text());
-  //   }
-  //   getQuestions();
-  // }, []);
+  function handleQuitClick() {
+    setCategory();
+    setDifficulty();
+    setLimit();
+  }
 
   const categories = CATEGORIES.map(c => (
     <Category
@@ -81,17 +75,12 @@ export default function BigQuiz() {
 
       {category && !difficulty && <Settings onStartClick={handleStartClick} />}
 
-      <Question
-        number={1}
-        total={limit}
-        correctAnswers={[{ id: 1 }]}
-        description="Time's up. Answer?"
-        possibleAnswers={[
-          { id: 1, text: "yes" },
-          { id: 2, text: "no" },
-        ]}
-        hasMultipleAnswers={false}
-      />
+      {category && difficulty && (
+        <Quiz
+          onQuitClick={handleQuitClick}
+          {...{ category, difficulty, limit }}
+        />
+      )}
 
       <Summary
         category={category}

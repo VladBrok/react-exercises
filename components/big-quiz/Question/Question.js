@@ -9,8 +9,9 @@ export default function Question({
   correctAnswers,
   hasMultipleAnswers,
   onQuitClick,
-  onCheckClick,
 }) {
+  function handleCheckClick() {}
+
   return (
     <div>
       <header>
@@ -28,7 +29,7 @@ export default function Question({
 
       <div>
         <button onClick={onQuitClick}>Quit Quiz</button>
-        <button onClick={onCheckClick}>Check</button>
+        <button onClick={handleCheckClick}>Check</button>
       </div>
     </div>
   );
