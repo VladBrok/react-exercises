@@ -17,27 +17,41 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   }, []);
 
   if (!questions) {
-    return null;
+    return <div></div>;
   }
 
   const question = questions[current];
   const questionElement = (
-    <Question
-      number={current + 1}
-      total={limit}
-      correctAnswers={Object.keys(question.correct_answers)
-        .filter(k => question.correct_answers[k] === "true")
-        .map(k => ({
-          id: k,
-        }))}
-      description={question.question}
-      possibleAnswers={Object.entries(question.answers)
-        .filter(e => e[1])
-        .map(([k, v]) => ({ id: k, text: v }))}
-      hasMultipleAnswers={question.multiple_correct_answers === "true"}
-      onQuitClick={onQuitClick}
-    />
+    <>
+      <header>
+        <h1>
+          Question <span>{current + 1}</span>
+          <span>/{limit}</span>
+        </h1>
+      </header>
+      <Question
+        correctAnswers={extractCorrectAnswers(question)}
+        description={question.question}
+        possibleAnswers={extractPossibleAnswers(question)}
+        hasMultipleAnswers={question.multiple_correct_answers === "true"}
+        onQuitClick={onQuitClick}
+      />
+    </>
   );
 
   return <div>{questionElement}</div>;
+}
+
+function extractCorrectAnswers(question) {
+  return Object.keys(question.correct_answers)
+    .filter(k => question.correct_answers[k] === "true")
+    .map(k => ({
+      id: k,
+    }));
+}
+
+function extractPossibleAnswers(question) {
+  return Object.entries(question.answers)
+    .filter(e => e[1])
+    .map(([k, v]) => ({ id: k, text: v }));
 }
