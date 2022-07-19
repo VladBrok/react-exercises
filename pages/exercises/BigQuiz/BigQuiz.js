@@ -9,6 +9,7 @@ import { FaDatabase } from "react-icons/fa";
 import { FaHtml5 } from "react-icons/fa";
 import { SiGnubash, SiJavascript } from "react-icons/si";
 import { FaDocker } from "react-icons/fa";
+import Image from "next/image";
 
 const CATEGORIES = [
   { name: "Linux", icon: FaLinux },
@@ -49,35 +50,47 @@ export default function BigQuiz() {
   ));
 
   return (
-    <div>
-      <Head>
-        <title>Big Quiz</title>
-        <meta
-          name="description"
-          content="Answer the most interesting tech questions of all time!"
-        />
-      </Head>
+    <div className={styles.container}>
+      <div className={styles["inner-container"]}>
+        <Head>
+          <title>Big Quiz</title>
+          <meta
+            name="description"
+            content="Answer the most interesting tech questions of all time!"
+          />
+        </Head>
 
-      {!category && (
-        <>
-          <div>
-            <h1>Answer the most interesting tech questions!</h1>
-          </div>
-          <section>
-            <h2>Categories</h2>
-            <div>{categories}</div>
-          </section>
-        </>
-      )}
+        {!category && (
+          <>
+            <div className={styles.hero}>
+              <Image
+                src="/images/questions.png"
+                alt=""
+                width={100}
+                height={100}
+                objectFit="cover"
+                priority
+              />
+              <h1 className={styles.title}>Answer questions &amp; Win</h1>
+            </div>
+            <section>
+              <h2 className={styles["categories-title"]}>Categories</h2>
+              <ul className={styles.categories}>{categories}</ul>
+            </section>
+          </>
+        )}
 
-      {category && !difficulty && <Settings onStartClick={handleStartClick} />}
+        {category && !difficulty && (
+          <Settings onStartClick={handleStartClick} />
+        )}
 
-      {category && difficulty && (
-        <Quiz
-          onQuitClick={handleQuitClick}
-          {...{ category, difficulty, limit }}
-        />
-      )}
+        {category && difficulty && (
+          <Quiz
+            onQuitClick={handleQuitClick}
+            {...{ category, difficulty, limit }}
+          />
+        )}
+      </div>
     </div>
   );
 }

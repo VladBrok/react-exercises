@@ -1,0 +1,69 @@
+@use "./mixins.scss" as m;
+@use "/styles/breakpoints.scss" as b;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem;
+  background: #edf4f6;
+
+  $border: 1.2rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 8rem;
+    background: #292b31;
+    border-bottom-right-radius: $border;
+    border-bottom-left-radius: $border;
+    content: "";
+  }
+}
+
+.inner-container {
+  max-width: 21rem;
+  margin: 0 auto;
+}
+
+.hero {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  min-height: 9rem;
+  padding: 1.5rem;
+  background: black;
+
+  @include m.rounded-xl;
+}
+
+.title {
+  color: white;
+
+  @include m.text-xl;
+}
+
+.categories-title {
+  $mg: 1.5rem;
+  margin: 1.5rem 0;
+  color: black;
+  text-align: center;
+
+  @media screen and (min-width: b.$sm) {
+    margin: calc($mg * 1.25) 0;
+  }
+
+  @include m.text-xl;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}

@@ -1,0 +1,12 @@
+@mixin text-xl {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+@mixin rounded-xl {
+  border-radius: 0.8rem;
+}
+
+@mixin rounded-lg {
+  border-radius: 0.5rem;
+}

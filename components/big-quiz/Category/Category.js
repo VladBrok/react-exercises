@@ -7,8 +7,8 @@ export default function Category({ name, Icon, onClick }) {
 
   return (
     <li>
-      <button onClick={handleClick}>
-        <Icon />
+      <button className={styles.button} onClick={handleClick}>
+        <Icon className={styles.icon} />
         <h3>{name}</h3>
       </button>
     </li>
