@@ -51,46 +51,42 @@ export default function BigQuiz() {
 
   return (
     <div className={styles.container}>
-      <div className={styles["inner-container"]}>
-        <Head>
-          <title>Big Quiz</title>
-          <meta
-            name="description"
-            content="Answer the most interesting tech questions of all time!"
-          />
-        </Head>
+      <Head>
+        <title>Big Quiz</title>
+        <meta
+          name="description"
+          content="Answer the most interesting tech questions of all time!"
+        />
+      </Head>
 
-        {!category && (
-          <>
-            <div className={styles.hero}>
-              <Image
-                src="/images/questions.png"
-                alt=""
-                width={100}
-                height={100}
-                objectFit="cover"
-                priority
-              />
-              <h1 className={styles.title}>Answer questions &amp; Win</h1>
-            </div>
-            <section>
-              <h2 className={styles["categories-title"]}>Categories</h2>
-              <ul className={styles.categories}>{categories}</ul>
-            </section>
-          </>
-        )}
+      {!category && (
+        <div className={styles.category}>
+          <div className={styles.hero}>
+            <Image
+              src="/images/questions.png"
+              alt=""
+              width={100}
+              height={100}
+              objectFit="cover"
+              priority
+            />
+            <h1 className={styles.title}>Answer questions &amp; Win</h1>
+          </div>
+          <section className={styles["inner-container"]}>
+            <h2 className={styles["categories-title"]}>Categories</h2>
+            <ul className={styles.categories}>{categories}</ul>
+          </section>
+        </div>
+      )}
 
-        {category && !difficulty && (
-          <Settings onStartClick={handleStartClick} />
-        )}
+      {category && !difficulty && <Settings onStartClick={handleStartClick} />}
 
-        {category && difficulty && (
-          <Quiz
-            onQuitClick={handleQuitClick}
-            {...{ category, difficulty, limit }}
-          />
-        )}
-      </div>
+      {category && difficulty && (
+        <Quiz
+          onQuitClick={handleQuitClick}
+          {...{ category, difficulty, limit }}
+        />
+      )}
     </div>
   );
 }

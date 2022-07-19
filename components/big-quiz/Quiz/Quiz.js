@@ -43,10 +43,11 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
     const question = questions[current];
     content = (
       <>
-        <header>
-          <h1>
-            Question <span>{current + 1}</span>
-            <span>/{limit}</span>
+        <header className={styles.header}>
+          <h1 className={styles.title}>
+            Question{" "}
+            <span className={styles["current-question"]}>{current + 1}</span>
+            <span className={styles.limit}>/{limit}</span>
           </h1>
         </header>
         <Question
@@ -61,7 +62,7 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
     );
   }
 
-  return <div>{content}</div>;
+  return <div className={styles.container}>{content}</div>;
 }
 
 function extractCorrectAnswers(question) {

@@ -1,0 +1,25 @@
+@use "../../../pages/exercises/BigQuiz/variables.scss" as v;
+@use "../../../pages/exercises/BigQuiz/mixins.scss" as m;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  color: #e1e2e9;
+  background: #10152a;
+}
+
+.header {
+}
+
+.title {
+  @include m.text-xl;
+}
+
+.current-question {
+  @include m.text-2xl;
+}
+
+.limit {
+  color: v.$disabled-color;
+}

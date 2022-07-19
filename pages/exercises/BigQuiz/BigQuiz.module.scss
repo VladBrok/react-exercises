@@ -1,13 +1,18 @@
 @use "./mixins.scss" as m;
 @use "/styles/breakpoints.scss" as b;
+$border: 1.2rem;
 
 .container {
   width: 100%;
   min-height: 100vh;
-  padding: 2.5rem 1.5rem;
+  overflow-y: hidden;
   background: #edf4f6;
+}
 
-  $border: 1.2rem;
+.inner-container {
+  max-width: 21rem;
+  height: 100%;
+  margin: 0 auto;
 
   &::before {
     position: absolute;
@@ -23,9 +28,9 @@
   }
 }
 
-.inner-container {
-  max-width: 21rem;
-  margin: 0 auto;
+.category {
+  height: 100%;
+  margin: 2.5rem 1.5rem;
 }
 
 .hero {
@@ -35,7 +40,6 @@
   gap: 1rem;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
   min-height: 9rem;
   padding: 1.5rem;
   background: black;
@@ -51,15 +55,15 @@
 
 .categories-title {
   $mg: 1.5rem;
-  margin: 1.5rem 0;
+  margin: $mg 0;
   color: black;
   text-align: center;
+
+  @include m.text-xl;
 
   @media screen and (min-width: b.$sm) {
     margin: calc($mg * 1.25) 0;
   }
-
-  @include m.text-xl;
 }
 
 .categories {

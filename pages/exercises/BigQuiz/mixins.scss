@@ -3,6 +3,11 @@
   font-size: 1.2rem;
 }
 
+@mixin text-2xl {
+  @include text-xl;
+  font-size: 1.4rem;
+}
+
 @mixin rounded-xl {
   border-radius: 0.8rem;
 }

@@ -66,7 +66,7 @@ export default function Question({
   const resultText = isCorrect ? "Correct!" : "Wrong.";
 
   return (
-    <div>
+    <div className={styles.container}>
       <Checkbox
         description={description}
         hasMultipleOptions={hasMultipleAnswers}

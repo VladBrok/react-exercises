@@ -1,0 +1,37 @@
+@use "../../../pages/exercises/BigQuiz/variables.scss" as v;
+
+.container {
+  border: none;
+}
+
+.description {
+  display: block;
+  padding: 1.5rem 0;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.6rem 1rem;
+  color: v.$disabled-color;
+  border: 0.1rem solid v.$disabled-color;
+  border-radius: 0.5rem;
+}
+
+.label {
+}
+
+.input {
+  color: red;
+}
+
+.highlighted {
+  color: v.$highlight-color;
+  border-color: v.$highlight-color;
+}
+
+.emphasize {
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
+}
