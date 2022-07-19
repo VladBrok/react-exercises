@@ -24,9 +24,7 @@ export default function Checkbox({
         }`}
         key={o.id}
       >
-        <label className={styles.label} htmlFor={o.id}>
-          {o.text}
-        </label>
+        <label htmlFor={o.id}>{o.text}</label>
         <input
           className={styles.input}
           type="checkbox"

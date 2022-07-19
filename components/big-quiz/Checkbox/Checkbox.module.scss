@@ -19,11 +19,9 @@
   border-radius: 0.5rem;
 }
 
-.label {
-}
-
 .input {
-  color: red;
+  color: white;
+  accent-color: v.$highlight-color;
 }
 
 .highlighted {
