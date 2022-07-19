@@ -13,7 +13,6 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
       const response = await fetch(
         `/api/questions?limit=${limit}&difficulty=${difficulty}&tags=${category}`
       );
-      console.log(response.status);
       setQuestions(await response.json());
     }
     getQuestions();
@@ -26,12 +25,12 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
     setCurrent(cur => cur + 1);
   }
 
-  if (!questions) {
-    return <div>Loading...</div>;
-  }
+  let content;
 
-  if (current >= questions.length) {
-    return (
+  if (!questions) {
+    content = "Loading...";
+  } else if (current >= questions.length) {
+    content = (
       <Summary
         correctAnswers={correctCount}
         category={category}
@@ -40,30 +39,29 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
         onTakeNewQuizClick={onQuitClick}
       />
     );
+  } else {
+    const question = questions[current];
+    content = (
+      <>
+        <header>
+          <h1>
+            Question <span>{current + 1}</span>
+            <span>/{limit}</span>
+          </h1>
+        </header>
+        <Question
+          correctAnswers={extractCorrectAnswers(question)}
+          description={question.question}
+          possibleAnswers={extractPossibleAnswers(question)}
+          hasMultipleAnswers={question.multiple_correct_answers === "true"}
+          onQuitClick={onQuitClick}
+          onNextClick={handleNextClick}
+        />
+      </>
+    );
   }
 
-  const question = questions[current];
-  console.log(question);
-  const questionElement = (
-    <>
-      <header>
-        <h1>
-          Question <span>{current + 1}</span>
-          <span>/{limit}</span>
-        </h1>
-      </header>
-      <Question
-        correctAnswers={extractCorrectAnswers(question)}
-        description={question.question}
-        possibleAnswers={extractPossibleAnswers(question)}
-        hasMultipleAnswers={question.multiple_correct_answers === "true"}
-        onQuitClick={onQuitClick}
-        onNextClick={handleNextClick}
-      />
-    </>
-  );
-
-  return <div>{questionElement}</div>;
+  return <div>{content}</div>;
 }
 
 function extractCorrectAnswers(question) {
