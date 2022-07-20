@@ -27,11 +27,10 @@
 }
 
 @mixin button {
+  @include rounded-lg;
   padding: 0.7rem 1.2rem;
   color: v.$text-color;
   background: #05d3f6;
-
-  @include rounded-lg;
 
   &:disabled {
     cursor: default;

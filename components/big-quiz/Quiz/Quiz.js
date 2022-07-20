@@ -1,12 +1,12 @@
 import styles from "./Quiz.module.scss";
 import Question from "../Question";
 import Summary from "../Summary";
+import QuizProgress from "../QuizProgress";
 import { useEffect, useState } from "react";
 
 export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   const [questions, setQuestions] = useState();
-  const [current, setCurrent] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [answered, setAnswered] = useState([]);
 
   useEffect(() => {
     async function getQuestions() {
@@ -19,20 +19,17 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   }, []);
 
   function handleNextClick(isCorrect) {
-    if (isCorrect) {
-      setCorrectCount(cur => cur + 1);
-    }
-    setCurrent(cur => cur + 1);
+    setAnswered(cur => [...cur, { isCorrect }]);
   }
 
   let content;
 
   if (!questions) {
     content = "Loading...";
-  } else if (current >= questions.length) {
+  } else if (answered.length >= questions.length) {
     content = (
       <Summary
-        correctAnswers={correctCount}
+        correctAnswers={answered.filter(a => a.isCorrect).length}
         category={category}
         totalAnswers={limit}
         difficulty={difficulty}
@@ -40,15 +37,18 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
       />
     );
   } else {
-    const question = questions[current];
+    const question = questions[answered.length];
     content = (
       <>
         <header className={styles.header}>
           <h1 className={styles.title}>
             Question{" "}
-            <span className={styles["current-question"]}>{current + 1}</span>
+            <span className={styles["current-question"]}>
+              {answered.length + 1}
+            </span>
             <span className={styles.limit}>/{limit}</span>
           </h1>
+          <QuizProgress answeredQuestions={answered} questionCount={limit} />
         </header>
         <Question
           correctAnswers={extractCorrectAnswers(question)}

@@ -1,0 +1,27 @@
+@use "../../../pages/exercises/BigQuiz/variables.scss" as v;
+
+.progress-list {
+  display: flex;
+  gap: 0.35rem;
+}
+
+@mixin item {
+  flex: 1 1 0;
+  height: 0.2rem;
+  margin-top: 1rem;
+}
+
+.regular {
+  @include item;
+  background-color: v.$disabled-color;
+}
+
+.correct {
+  @include item;
+  background-color: v.$highlight-color;
+}
+
+.wrong {
+  @include item;
+  background-color: v.$danger-color;
+}
