@@ -1,4 +1,5 @@
 @use "./mixins.scss" as m;
+@use "./variables.scss" as v;
 @use "/styles/breakpoints.scss" as b;
 $border: 1.2rem;
 
@@ -21,7 +22,7 @@ $border: 1.2rem;
     z-index: 0;
     width: 100%;
     height: 8rem;
-    background: #292b31;
+    background: v.$primary-color;
     border-bottom-right-radius: $border;
     border-bottom-left-radius: $border;
     content: "";
@@ -34,32 +35,31 @@ $border: 1.2rem;
 }
 
 .hero {
+  @include m.rounded-xl;
   position: relative;
   z-index: 10;
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-around;
+  max-width: 28rem;
   min-height: 9rem;
+  margin: 0 auto;
   padding: 1.5rem;
   background: black;
-
-  @include m.rounded-xl;
 }
 
 .title {
-  color: white;
-
   @include m.text-xl;
+  color: white;
 }
 
 .categories-title {
+  @include m.text-xl;
   $mg: 1.5rem;
   margin: $mg 0;
   color: black;
   text-align: center;
-
-  @include m.text-xl;
 
   @media screen and (min-width: b.$sm) {
     margin: calc($mg * 1.25) 0;
