@@ -1,0 +1,46 @@
+@use "../../../pages/exercises/BigQuiz/mixins.scss" as m;
+@use "../../../pages/exercises/BigQuiz/variables.scss" as v;
+
+.container {
+  text-align: center;
+}
+
+.title {
+  @include m.text-xl;
+}
+
+.text {
+  margin: 1rem 0;
+}
+
+.score {
+  margin-top: 2rem;
+  text-transform: uppercase;
+}
+
+.score-container {
+  letter-spacing: 0.2rem;
+}
+
+.image-container {
+  margin: 1.5rem 0;
+}
+
+.emphasize {
+  font-weight: bold;
+}
+
+.correct-answers {
+  @include m.text-xl;
+  color: v.$highlight-color;
+}
+
+.total-answers {
+  @include m.text-xl;
+}
+
+.button {
+  @include m.button;
+  display: block;
+  margin: 2rem auto;
+}

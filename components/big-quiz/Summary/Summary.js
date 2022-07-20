@@ -9,29 +9,36 @@ export default function Summary({
   onTakeNewQuizClick,
 }) {
   return (
-    <div>
+    <div className={styles.container}>
       <header>
-        <h1>Quiz Result</h1>
-        <Image
-          src="/images/trophy.png"
-          alt="Trophy"
-          width={100}
-          height={100}
-          objectFit="contain"
-          priority
-        />
-        <h2>Congratulations!</h2>
-        <p>
-          You have finished the <span>{category}</span> quiz on{" "}
-          <span>{difficulty}</span> difficulty!
+        <h1 className={styles.title}>Quiz Result</h1>
+        <div className={styles["image-container"]}>
+          <Image
+            className={styles.image}
+            src="/images/trophy.png"
+            alt="Trophy"
+            width={100}
+            height={100}
+            objectFit="contain"
+            priority
+          />
+        </div>
+        <h2 className={styles.title}>Congratulations!</h2>
+        <p className={styles.text}>
+          You have finished the{" "}
+          <span className={styles.emphasize}>{category}</span> quiz on{" "}
+          <span className={styles.emphasize}>{difficulty}</span> difficulty!
         </p>
       </header>
 
-      <p>Your score:</p>
-      <span>{correctAnswers}</span>
-      <span>/{totalAnswers}</span>
-
-      <button onClick={onTakeNewQuizClick}>Take New Quiz</button>
+      <div className={styles["score-container"]}>
+        <p className={styles.score}>Your score:</p>
+        <span className={styles["correct-answers"]}>{correctAnswers}</span>
+        <span className={styles["total-answers"]}>/{totalAnswers}</span>
+      </div>
+      <button className={styles.button} onClick={onTakeNewQuizClick}>
+        Take New Quiz
+      </button>
     </div>
   );
 }
