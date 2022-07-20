@@ -30,7 +30,12 @@
   font-weight: bold;
 }
 
-.correct-answers {
+.bad {
+  @include m.text-xl;
+  color: v.$danger-color;
+}
+
+.good {
   @include m.text-xl;
   color: v.$highlight-color;
 }

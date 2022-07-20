@@ -8,6 +8,10 @@ export default function Summary({
   difficulty,
   onTakeNewQuizClick,
 }) {
+  const correctAnswersPercentage = (correctAnswers * 100) / totalAnswers;
+  const correctAnswersStyle =
+    correctAnswersPercentage < 50 ? styles.bad : styles.good;
+
   return (
     <div className={styles.container}>
       <header>
@@ -33,7 +37,7 @@ export default function Summary({
 
       <div className={styles["score-container"]}>
         <p className={styles.score}>Your score:</p>
-        <span className={styles["correct-answers"]}>{correctAnswers}</span>
+        <span className={correctAnswersStyle}>{correctAnswers}</span>
         <span className={styles["total-answers"]}>/{totalAnswers}</span>
       </div>
       <button className={styles.button} onClick={onTakeNewQuizClick}>
