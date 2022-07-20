@@ -19,7 +19,9 @@ export default function Settings({ onStartClick }) {
   }
 
   function handleLimitChange(e) {
-    setLimit(e.target.value);
+    const input = e.target;
+    input.value = Math.min(Math.max(input.value, 1), 20);
+    setLimit(input.value);
   }
 
   const difficulties = DIFFICULTIES.map(d => ({ id: d, text: d }));
@@ -38,8 +40,6 @@ export default function Settings({ onStartClick }) {
         <input
           className={styles.input}
           type="number"
-          min="1"
-          max="20"
           id="limit"
           name="limit"
           value={limit}

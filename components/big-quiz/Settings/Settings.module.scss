@@ -22,6 +22,7 @@
 .input {
   @include m.rounded-lg;
   display: block;
+  max-width: 6rem;
   padding: 0.2rem 0.5rem;
   border: none;
 
