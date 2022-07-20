@@ -82,7 +82,8 @@ export default function Question({
         </p>
         <div className={styles["buttons-container"]}>
           <button className={styles["quit-button"]} onClick={onQuitClick}>
-            <AiOutlinePoweroff /> Quit Quiz (Esc)
+            <AiOutlinePoweroff className={styles["quit-icon"]} /> Quit Quiz
+            (Esc)
           </button>
           <button
             className={styles.button}

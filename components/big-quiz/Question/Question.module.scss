@@ -10,6 +10,10 @@
   background-color: transparent;
 }
 
+.quit-icon {
+  margin-bottom: -0.08rem;
+}
+
 .button {
   @include m.button;
 }
