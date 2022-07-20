@@ -25,7 +25,16 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
   let content;
 
   if (!questions) {
-    content = "Loading...";
+    content = (
+      <div className={styles.loading}>
+        <img
+          src="/images/loading.svg"
+          alt="Loading..."
+          width={40}
+          height={40}
+        />
+      </div>
+    );
   } else if (answered.length >= questions.length) {
     content = (
       <Summary
@@ -40,7 +49,7 @@ export default function Quiz({ limit, category, difficulty, onQuitClick }) {
     const question = questions[answered.length];
     content = (
       <>
-        <header className={styles.header}>
+        <header>
           <h1 className={styles.title}>
             Question{" "}
             <span className={styles["current-question"]}>
