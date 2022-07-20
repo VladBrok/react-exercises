@@ -7,13 +7,12 @@ import Quiz from "../../../components/big-quiz/Quiz";
 import { FaLinux } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa";
 import { FaHtml5 } from "react-icons/fa";
-import { SiGnubash, SiJavascript } from "react-icons/si";
+import { SiGnubash } from "react-icons/si";
 import { FaDocker } from "react-icons/fa";
 import Image from "next/image";
 
 const CATEGORIES = [
   { name: "Linux", icon: FaLinux },
-  { name: "JavaScript", icon: SiJavascript },
   { name: "MySql", icon: FaDatabase },
   { name: "HTML", icon: FaHtml5 },
   { name: "Bash", icon: SiGnubash },
