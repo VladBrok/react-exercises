@@ -1,6 +1,7 @@
 import styles from "./Question.module.scss";
 import Checkbox from "../Checkbox/Checkbox";
 import { useState, useEffect, useRef } from "react";
+import { AiOutlinePoweroff } from "react-icons/ai";
 
 export default function Question({
   description,
@@ -76,23 +77,31 @@ export default function Question({
       />
 
       <div>
-        <p style={{ visibility: resultVisibility }}>{resultText}</p>
-        <button onClick={onQuitClick}>Quit Quiz (Esc)</button>
-        <button
-          onClick={handleCheckClick}
-          disabled={!answerIds.length}
-          style={{ display: checkButtonDisplay }}
-          ref={checkButtonRef}
-        >
-          {"Check (Ctrl + ->)"}
-        </button>
-        <button
-          onClick={() => onNextClick(isCorrect)}
-          style={{ display: nextButtonDisplay }}
-          ref={nextButtonRef}
-        >
-          {"Next (Ctrl + ->)"}
-        </button>
+        <p className={styles.result} style={{ visibility: resultVisibility }}>
+          {resultText}
+        </p>
+        <div className={styles["buttons-container"]}>
+          <button className={styles["quit-button"]} onClick={onQuitClick}>
+            <AiOutlinePoweroff /> Quit Quiz (Esc)
+          </button>
+          <button
+            className={styles.button}
+            onClick={handleCheckClick}
+            disabled={!answerIds.length}
+            style={{ display: checkButtonDisplay }}
+            ref={checkButtonRef}
+          >
+            {"Check (Ctrl + ->)"}
+          </button>
+          <button
+            className={styles.button}
+            onClick={() => onNextClick(isCorrect)}
+            style={{ display: nextButtonDisplay }}
+            ref={nextButtonRef}
+          >
+            {"Next (Ctrl + ->)"}
+          </button>
+        </div>
       </div>
     </div>
   );

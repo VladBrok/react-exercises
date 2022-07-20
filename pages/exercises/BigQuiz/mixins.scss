@@ -1,3 +1,5 @@
+@use "./variables.scss" as v;
+
 @mixin text-xl {
   font-weight: 500;
   font-size: 1.2rem;
@@ -14,4 +16,17 @@
 
 @mixin rounded-lg {
   border-radius: 0.5rem;
+}
+
+@mixin button {
+  padding: 0.7rem 1.2rem;
+  color: v.$text-color;
+  background: #05d3f6;
+
+  @include rounded-lg;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
 }

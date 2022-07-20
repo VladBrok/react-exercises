@@ -45,7 +45,11 @@ export default function Settings({ onStartClick }) {
           onChange={handleLimitChange}
         />
       </div>
-      <button onClick={handleStartClick} disabled={!limit}>
+      <button
+        className={styles.button}
+        onClick={handleStartClick}
+        disabled={!limit}
+      >
         Let&apos;s Go!
       </button>
     </div>

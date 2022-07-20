@@ -1,0 +1,5 @@
+@use "../../../pages/exercises/BigQuiz/mixins.scss" as m;
+
+.button {
+  @include m.button;
+}

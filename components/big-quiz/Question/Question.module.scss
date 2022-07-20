@@ -1,0 +1,22 @@
+@use "../../../pages/exercises/BigQuiz/variables.scss" as v;
+@use "../../../pages/exercises/BigQuiz/mixins.scss" as m;
+
+.result {
+  text-align: center;
+}
+
+.quit-button {
+  color: v.$disabled-color;
+  background-color: transparent;
+}
+
+.button {
+  @include m.button;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.2rem;
+}
