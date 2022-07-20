@@ -1,5 +1,13 @@
 @use "./variables.scss" as v;
 
+@mixin container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  color: v.$text-color;
+  background: #10152a;
+}
+
 @mixin text-xl {
   font-weight: 500;
   font-size: 1.2rem;

@@ -2,11 +2,7 @@
 @use "../../../pages/exercises/BigQuiz/mixins.scss" as m;
 
 .container {
-  width: 100%;
-  min-height: 100vh;
-  padding: 1rem;
-  color: v.$text-color;
-  background: #10152a;
+  @include m.container;
 }
 
 .header {

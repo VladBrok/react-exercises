@@ -25,7 +25,7 @@ export default function Settings({ onStartClick }) {
   const difficulties = DIFFICULTIES.map(d => ({ id: d, text: d }));
 
   return (
-    <div>
+    <div className={styles.container}>
       <Checkbox
         description="Difficulty:"
         hasMultipleOptions={false}
@@ -33,9 +33,10 @@ export default function Settings({ onStartClick }) {
         checkedIds={[difficultyId]}
         onCheckedChange={handleCheckedChange}
       />
-      <div>
+      <div className={styles["input-container"]}>
         <label htmlFor="limit">Questions limit:</label>
         <input
+          className={styles.input}
           type="number"
           min="1"
           max="20"
