@@ -3,6 +3,8 @@ $shadow-blur: 0.15rem;
 $shadow-opacity: 0.3;
 
 .button {
+  @include m.animated-on-hover;
+  @include m.rounded-lg;
   display: block;
   display: flex;
   flex-direction: column;
@@ -15,8 +17,6 @@ $shadow-opacity: 0.3;
   background: white;
   box-shadow: 0 0 $shadow-blur 0 rgba(0, 0, 0, $shadow-opacity),
     0 0 calc($shadow-blur * 2) 0 rgba(0, 0, 0, $shadow-opacity);
-
-  @include m.rounded-lg;
 }
 
 .icon {
