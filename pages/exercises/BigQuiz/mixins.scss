@@ -1,11 +1,18 @@
 @use "./variables.scss" as v;
+@use "../../../styles/breakpoints.scss" as b;
 
 @mixin container {
   width: 100%;
   min-height: 100vh;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   color: v.$text-color;
   background: v.$primary-color;
+
+  & > * {
+    max-width: 30rem;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
 }
 
 @mixin text-xl {
