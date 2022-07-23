@@ -67,7 +67,7 @@ export default function BigQuiz() {
               width={100}
               height={100}
               objectFit="cover"
-              priority
+              loading="eager"
             />
             <h1 className={styles.title}>Answer questions &amp; Win</h1>
           </div>

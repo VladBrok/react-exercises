@@ -24,7 +24,7 @@ export default function Summary({
             width={100}
             height={100}
             objectFit="contain"
-            priority
+            loading="eager"
           />
         </div>
         <h2 className={styles.title}>Congratulations!</h2>
